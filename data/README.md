@@ -20,3 +20,5 @@ The browser demonstrations use the public [healthsites.io Ituri DRC export](http
 The browser demonstrations use GADM 4.1 level-1 GeoJSON endpoints for COD, UGA, RWA, BDI, SSD, ZMB, TZA, CAF, COG, and AGO. GADM data are freely available for academic and other non-commercial use; redistribution and commercial use require permission. See the [GADM data page](https://gadm.org/data.html).
 
 The Pages workflow converts the current [African Bat Database Figshare record](https://figshare.com/articles/dataset/African_Bat_Database/26363308) CSV (version 6, updated 2026-08-05) into `data/african-bat-database.geojson` at deploy time. The dataset is CC BY 4.0; cite Monadjem et al. (2024) and retain the Figshare DOI `10.6084/m9.figshare.26363308.v6`.
+
+The `whymap/shp/` directory preserves the supplied WHYMAP/WOKAM shapefile components. `scripts/convert_whymap.py` converts them to `whymap/geojson/` for browser maps: caves (92), karst polygons (2,805), non-exposed karst (331), and springs (201). All supplied files are WGS 84; retain the original WHYMAP metadata and source licence when redistributing.

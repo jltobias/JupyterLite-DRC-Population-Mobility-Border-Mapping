@@ -34,6 +34,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
 - Both map experiences include GADM 4.1 level-1 administrative boundaries for the study region.
 - Both map experiences include the African Bat Database occurrence layer; the Pages build converts the Figshare CSV to GeoJSON for browser use.
+- Both map experiences include WHYMAP/WOKAM layers for karst polygons, caves, non-exposed karst points, and springs.
 - `data/README.md` — safe data-ingestion rules and suggested folder layout.
 - `.github/workflows/deploy-pages.yml` — automatic JupyterLite + static-map deployment.
 
