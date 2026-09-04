@@ -21,6 +21,7 @@ The links below are stable GitHub Pages targets. They become live after the repo
 - [Global Human Settlement Layer download portal](https://human-settlement.emergency.copernicus.eu/download.php)
 - [Natural Earth 10m airports](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/airports/)
 - [HydroSHEDS HydroRIVERS](https://www.hydrosheds.org/products/hydrorivers)
+- [WorldMove human mobility](https://fi.ee.tsinghua.edu.cn/worldmove/)
 - [Repository contents](https://github.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/tree/main/contents)
 
 ## Geographic and analytical scope
@@ -43,6 +44,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - Both map experiences include an OpenStreetMap/Overpass POI layer sampled around Goma for amenity, shop, tourism, office, and public-transport context.
 - Both map experiences include the Natural Earth 10m airports layer for regional transport context.
 - Both map experiences include a browser-ready HydroRIVERS v1.0 regional extract from the official HydroSHEDS Africa download, filtered to the DRC/Great Lakes window and the main river network for interactive display.
+- Both map experiences include a WorldMove access layer. WorldMove city data are downloaded per selected city from the official portal; the repository layer is an intentionally empty DRC/Great Lakes handoff until a selected city package is downloaded and converted, so it does not mislabel the synthetic demonstration flow as WorldMove data.
 - The MapLibre experience includes a GHSL 2020 built-up-surface raster layer from the European Commission JRC WMS. The GeoLibre launcher uses file-based sources only and links to the official GHSL portal for compatible downloaded extracts and other products, epochs, and resolutions.
 - The shared demonstration flow layer includes an explicit DRC → South Sudan corridor from Ituri toward Juba; its value is synthetic and must be replaced with a dated mobility extract before analysis.
 - Both map experiences include WHYMAP/WOKAM layers for karst polygons, caves, non-exposed karst points, and springs.

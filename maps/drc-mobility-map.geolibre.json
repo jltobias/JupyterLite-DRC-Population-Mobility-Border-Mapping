@@ -7,6 +7,7 @@
   "basemapOpacity": 1,
   "layers": [
     {"id":"demo-flow","name":"Mobility flows (demonstration)","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson","visible":true,"opacity":1,"style":{"circleRadius":7,"strokeWidth":2}},
+    {"id":"worldmove","name":"WorldMove human mobility (portal access)","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/worldmove/worldmove-drc-great-lakes.geojson","visible":false,"opacity":1},
     {"id":"healthsites","name":"Healthsites.io facilities","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson","visible":false,"opacity":1},
     {"id":"african-bats","name":"African Bat Database","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/data/african-bat-database.geojson","visible":false,"opacity":1},
     {"id":"overture-buildings","name":"Overture building footprints","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/overture/buildings-goma-sample.geojson","visible":false,"opacity":1},
