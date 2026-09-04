@@ -34,14 +34,15 @@ jobs:
         run: |
           python - <<'PY'
           import csv, io, json, pathlib, urllib.request
+          csv.field_size_limit(10_000_000)
           url = 'https://ndownloader.figshare.com/files/67270397'
           raw = urllib.request.urlopen(url).read().decode('utf-8-sig')
           rows = csv.DictReader(io.StringIO(raw))
           features = []
           for row in rows:
               try:
-                  lon = float(row['Longitude'])
-                  lat = float(row['Latitude'])
+                  lon = float((row.get('Longitude') or '').strip())
+                  lat = float((row.get('Latitude') or '').strip())
               except (KeyError, TypeError, ValueError):
                   continue
               properties = {k: v for k, v in row.items() if k not in ('Longitude', 'Latitude')}
