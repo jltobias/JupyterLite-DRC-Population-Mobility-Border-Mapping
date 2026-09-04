@@ -8,7 +8,14 @@
 <body>
   <p>Opening the DRC demonstration layers in <a id="launch" href="#">GeoLibre Web</a>…</p>
   <script>
-    const target = 'https://web.geolibre.app/?data=https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson&data=https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson&layout=viewer';
+    const sources = [
+      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson',
+      'https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson',
+      ...['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_${iso}_1.json`)
+    ];
+    const target = new URL('https://web.geolibre.app/');
+    sources.forEach(url => target.searchParams.append('data', url));
+    target.searchParams.set('layout', 'viewer');
     document.getElementById('launch').href = target;
     window.location.replace(target);
   </script>
