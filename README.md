@@ -6,12 +6,16 @@ Browser-based notebooks, JupyterGIS-ready storymaps, MapLibre/GeoLibre maps, and
 
 The links below are stable GitHub Pages targets. They become live after the repository's **Deploy browser workspace** action completes and GitHub Pages is configured to deploy from GitHub Actions.
 
+For the Notebook.link JupyterGIS project, use the `github.com` route above (not `/github/`). The `.nblink` files and `.jGIS` project must first be committed and pushed to the repository's `main` branch; Notebook.link reads the public GitHub snapshot, not uncommitted local files. After the workspace loads, open `contents/storymaps/drc-ebola-outbreak-storymap.jGIS` from the file browser and choose the story/presentation view. To create a one-click presentation link like the QuantStack example, create a Notebook.link repository link and set that `.jGIS` file as its **Document path** with the **Presentation** interface selected.
+
 - [JupyterLite workspace](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html)
 - [Data inventory notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/01_data_inventory.ipynb)
 - [Mobility flowmap notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/02_mobility_flowmap.ipynb)
 - [Health and access notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/03_health_access_layers.ipynb)
 - [JupyterGIS storymap storyboard](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/drc-ebola-mobility-storymap.ipynb)
 - [Ebola weekly map-tour storymap](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/ebola-weekly-map-tour.ipynb)
+- [Ebola outbreak place-and-time storymap](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/drc-ebola-outbreak-storymap.ipynb)
+- [Notebook.link JupyterGIS storymap workspace](https://notebook.link/github.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/tree/main/)
 - [GeoLibre Web mobility map](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/maps/drc-mobility-map.html) (reopen this launcher after updates so it generates the current source URL)
 - [MapLibre GL JS notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/04_maplibre_experience.ipynb)
 - [Open all notebooks, storymaps, and maps in Chrome](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/maps/chrome-launcher.html)
@@ -42,6 +46,9 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `contents/notebooks/03_health_access_layers.ipynb` — Overpass query starter and metadata fields for health, shelter, and transport layers.
 - `contents/storymaps/drc-ebola-mobility-storymap.ipynb` — JupyterGIS-ready narrative storyboard.
 - `contents/storymaps/ebola-weekly-map-tour.ipynb` — JupyterGIS-ready weekly Ebola map tour with place/time navigation, case line listing, charts, approximate locality maps, and Street View links.
+- `contents/storymaps/drc-ebola-outbreak-storymap.ipynb` — third JupyterGIS-ready narrative storymap with outbreak timeline, guided locality stops, weekly navigation, contextual Google Maps links, charts, and a GeoJSON handoff.
+- `contents/storymaps/drc-ebola-outbreak-storymap.jGIS` — portable JupyterGIS guided story project with six map segments, an OSM basemap, the bundled Ebola GeoJSON layer, and response-context narrative text. Open this file from the Notebook.link workspace above.
+- `.nblink/environment.yml` — Notebook.link environment definition including `jupytergis-lite` and `xeus-python`.
 - `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app, opening in Ituri with the demonstration flow visible and contextual layers available but off by default. The ten GADM boundary layers are grouped under `Administrative boundaries`.
 - `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
 - `maps/chrome-launcher.html` — Chrome-protocol launcher with a fallback link for every notebook, storymap, and map.

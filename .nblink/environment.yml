@@ -1,0 +1,7 @@
+name: drc-ebola-storymap
+channels:
+  - https://repo.prefix.dev/emscripten-forge-dev
+  - https://repo.prefix.dev/conda-forge
+dependencies:
+  - xeus-python
+  - jupytergis-lite

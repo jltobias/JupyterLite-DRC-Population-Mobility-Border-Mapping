@@ -19,6 +19,8 @@ $paths = @(
   'lab/index.html?path=notebooks/04_maplibre_experience.ipynb',
   'lab/index.html?path=storymaps/drc-ebola-mobility-storymap.ipynb',
   'lab/index.html?path=storymaps/ebola-weekly-map-tour.ipynb',
+  'lab/index.html?path=storymaps/drc-ebola-outbreak-storymap.ipynb',
+  'https://notebook.link/github.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/tree/main/',
   'maps/drc-mobility-map.html',
   'maps/maplibre-drc-mobility.html'
 )

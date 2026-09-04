@@ -1,0 +1,248 @@
+{
+  "layerTree": [
+    "ec985ef0-7d88-4e1c-9adf-959d00cbdeeb",
+    "b17b150d-a794-43a8-9b3b-8dc6667441d8",
+    "56319de9-b196-4400-806f-f8b465d7f389",
+    "d7cf1fde-fe28-4173-971e-36fd66b54063",
+    "8a48e04e-59ee-4981-bf7b-9747689412c5",
+    "11525d76-5f7d-4bd9-b18f-36cecff37014",
+    "aa9f12c0-67b5-42bd-bb9a-228d31ef45e0",
+    "23c5303e-577c-4046-a5bc-20f4ae88be5c"
+  ],
+  "layers": {
+    "ec985ef0-7d88-4e1c-9adf-959d00cbdeeb": {
+      "name": "OpenStreetMap.Mapnik",
+      "parameters": {
+        "opacity": 1.0,
+        "source": "1dc86fac-6f3e-40b4-92cf-d0ae28047081"
+      },
+      "type": "RasterLayer",
+      "visible": true
+    },
+    "b17b150d-a794-43a8-9b3b-8dc6667441d8": {
+      "name": "Ebola reported values — approximate localities",
+      "parameters": {
+        "opacity": 0.9,
+        "source": "6115072b-e9c9-492e-8e88-c29fc9ff07f7",
+        "symbologyState": {},
+        "color": {
+          "circle-fill-color": "#c0392b",
+          "circle-radius": 7.0,
+          "circle-stroke-color": "#ffffff",
+          "circle-stroke-width": 1.5
+        }
+      },
+      "type": "VectorLayer",
+      "visible": true
+    },
+    "56319de9-b196-4400-806f-f8b465d7f389": {
+      "name": "Mongbalu",
+      "parameters": {
+        "content": {
+          "contentMode": "map",
+          "markdown": "**Ituri reporting cluster.** Review the locality series alongside dated response and mobility evidence.\\n\\nReported values are cumulative provider observations. Coordinates are approximate locality placements, not patient or facility locations. See the notebook for weekly charts, source fields, and Google Maps context links.",
+          "title": "Mongbalu"
+        },
+        "extent": [
+          3191811.113614073,
+          67114.92541003285,
+          3491811.113614073,
+          367114.92541003285
+        ],
+        "layerOverride": [],
+        "transition": {
+          "time": 1.5,
+          "type": "smooth"
+        },
+        "zoom": 7.2
+      },
+      "type": "StorySegmentLayer",
+      "visible": true
+    },
+    "d7cf1fde-fe28-4173-971e-36fd66b54063": {
+      "name": "Bunia",
+      "parameters": {
+        "content": {
+          "contentMode": "map",
+          "markdown": "**Ituri provincial context.** Use the urban and referral context to ask what access data cover the same period.\\n\\nReported values are cumulative provider observations. Coordinates are approximate locality placements, not patient or facility locations. See the notebook for weekly charts, source fields, and Google Maps context links.",
+          "title": "Bunia"
+        },
+        "extent": [
+          3217414.5964965257,
+          23679.865601467667,
+          3517414.5964965257,
+          323679.86560146767
+        ],
+        "layerOverride": [],
+        "transition": {
+          "time": 1.5,
+          "type": "smooth"
+        },
+        "zoom": 7.2
+      },
+      "type": "StorySegmentLayer",
+      "visible": true
+    },
+    "8a48e04e-59ee-4981-bf7b-9747689412c5": {
+      "name": "Beni",
+      "parameters": {
+        "content": {
+          "contentMode": "map",
+          "markdown": "**North Kivu corridor.** Compare weekly reported values without inferring transmission from adjacency.\\n\\nReported values are cumulative provider observations. Coordinates are approximate locality placements, not patient or facility locations. See the notebook for weekly charts, source fields, and Google Maps context links.",
+          "title": "Beni"
+        },
+        "extent": [
+          3130585.393677772,
+          -95452.7845890295,
+          3430585.393677772,
+          204547.2154109705
+        ],
+        "layerOverride": [],
+        "transition": {
+          "time": 1.5,
+          "type": "smooth"
+        },
+        "zoom": 7.2
+      },
+      "type": "StorySegmentLayer",
+      "visible": true
+    },
+    "11525d76-5f7d-4bd9-b18f-36cecff37014": {
+      "name": "Butembo",
+      "parameters": {
+        "content": {
+          "contentMode": "map",
+          "markdown": "**North Kivu health-service context.** Verify facilities and service availability against a dated provider extract.\\n\\nReported values are cumulative provider observations. Coordinates are approximate locality placements, not patient or facility locations. See the notebook for weekly charts, source fields, and Google Maps context links.",
+          "title": "Butembo"
+        },
+        "extent": [
+          3110547.8853349825,
+          -135528.4537801997,
+          3410547.8853349825,
+          164471.5462198003
+        ],
+        "layerOverride": [],
+        "transition": {
+          "time": 1.5,
+          "type": "smooth"
+        },
+        "zoom": 7.2
+      },
+      "type": "StorySegmentLayer",
+      "visible": true
+    },
+    "aa9f12c0-67b5-42bd-bb9a-228d31ef45e0": {
+      "name": "Goma",
+      "parameters": {
+        "content": {
+          "contentMode": "map",
+          "markdown": "**Cross-border preparedness context.** A city context stop—not a claim about case location or individual risk.\\n\\nReported values are cumulative provider observations. Coordinates are approximate locality placements, not patient or facility locations. See the notebook for weekly charts, source fields, and Google Maps context links.",
+          "title": "Goma"
+        },
+        "extent": [
+          3103868.7158873864,
+          -337043.54830381693,
+          3403868.7158873864,
+          -37043.54830381693
+        ],
+        "layerOverride": [],
+        "transition": {
+          "time": 1.5,
+          "type": "smooth"
+        },
+        "zoom": 7.2
+      },
+      "type": "StorySegmentLayer",
+      "visible": true
+    },
+    "23c5303e-577c-4046-a5bc-20f4ae88be5c": {
+      "name": "Aru",
+      "parameters": {
+        "content": {
+          "contentMode": "map",
+          "markdown": "**Northern border-facing context.** Pair reported observations with verified border, displacement, and mobility data.\\n\\nReported values are cumulative provider observations. Coordinates are approximate locality placements, not patient or facility locations. See the notebook for weekly charts, source fields, and Google Maps context links.",
+          "title": "Aru"
+        },
+        "extent": [
+          3281979.901156624,
+          168506.03866984585,
+          3581979.901156624,
+          468506.03866984585
+        ],
+        "layerOverride": [],
+        "transition": {
+          "time": 1.5,
+          "type": "smooth"
+        },
+        "zoom": 7.2
+      },
+      "type": "StorySegmentLayer",
+      "visible": true
+    }
+  },
+  "metadata": {
+    "title": "DRC Ebola outbreak — place and time",
+    "dataNote": "HDX / INRB-UMIE reported cumulative values; approximate locality coordinates.",
+    "source": "https://data.humdata.org/dataset/republique-democratique-du-congo-cas-et-deces-d-ebola"
+  },
+  "options": {
+    "bearing": 0.0,
+    "extent": [
+      2671667.7790385657,
+      -445640.1096560273,
+      3784862.6869713017,
+      501453.5101383213
+    ],
+    "latitude": 1.0,
+    "longitude": 29.8,
+    "pitch": 0.0,
+    "projection": "EPSG:3857",
+    "zoom": 6.0
+  },
+  "schemaVersion": "0.6.0",
+  "sources": {
+    "1dc86fac-6f3e-40b4-92cf-d0ae28047081": {
+      "name": "OpenStreetMap.Mapnik",
+      "parameters": {
+        "attribution": "(C) OpenStreetMap contributors",
+        "bounds": [],
+        "htmlAttribution": "",
+        "interpolate": false,
+        "maxZoom": 19.0,
+        "minZoom": 0.0,
+        "provider": "OpenStreetMap",
+        "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "urlParameters": {},
+        "useProxy": false
+      },
+      "type": "RasterSource"
+    },
+    "6115072b-e9c9-492e-8e88-c29fc9ff07f7": {
+      "name": "DRC Ebola reported values",
+      "parameters": {
+        "httpHeaders": "",
+        "path": "data/ebola/drc-ebola-cases-deaths.geojson",
+        "useProxy": false
+      },
+      "type": "GeoJSONSource"
+    }
+  },
+  "stories": {
+    "4c9648c2-5cbd-44f3-9df5-ebea5ab69265": {
+      "presentationBgColor": "#241b1e",
+      "presentationTextColor": "#f6eee5",
+      "showGradient": true,
+      "storySegments": [
+        "56319de9-b196-4400-806f-f8b465d7f389",
+        "d7cf1fde-fe28-4173-971e-36fd66b54063",
+        "8a48e04e-59ee-4981-bf7b-9747689412c5",
+        "11525d76-5f7d-4bd9-b18f-36cecff37014",
+        "aa9f12c0-67b5-42bd-bb9a-228d31ef45e0",
+        "23c5303e-577c-4046-a5bc-20f4ae88be5c"
+      ],
+      "storyType": "guided",
+      "title": "DRC Ebola outbreak: place and time"
+    }
+  },
+  "viewState": {}
+}
