@@ -23,6 +23,7 @@
     const target = new URL('https://web.geolibre.app/');
     sources.forEach(url => target.searchParams.append('data', url));
     target.searchParams.set('layout', 'viewer');
+    target.searchParams.set('config_version', 'repository-gadm-20260904');
     document.getElementById('launch').href = target;
     window.location.replace(target);
   </script>
