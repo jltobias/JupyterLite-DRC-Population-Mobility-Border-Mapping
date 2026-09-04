@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DRC mobility and border context map</title>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <style>
+    :root { --ink:#18252d; --accent:#d96c42; --teal:#147d7e; }
+    html, body, #map { height:100%; margin:0; }
+    body { font-family: system-ui, sans-serif; color:var(--ink); }
+    #panel { position:absolute; z-index:2; top:16px; left:16px; width:min(360px,calc(100% - 32px)); padding:16px 18px; background:#fffdf8ee; box-shadow:0 2px 16px #0003; border-radius:12px; }
+    h1 { font-size:1.15rem; margin:0 0 6px; } p { font-size:.86rem; line-height:1.35; margin:6px 0 12px; }
+    .warning { border-left:4px solid var(--accent); padding-left:9px; }
+    label { display:block; margin:8px 0; font-size:.9rem; } input { margin-right:7px; accent-color:var(--teal); }
+    .legend { display:grid; gap:5px; margin-top:12px; font-size:.8rem; } .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
+    a { color:#096b70; } .maplibregl-ctrl-attrib { font-size:10px; }
+  </style>
+</head>
+<body>
+  <aside id="panel">
+    <h1>DRC population mobility & border context</h1>
+    <p class="warning"><strong>Demonstration interface.</strong> Flow widths and points are illustrative placeholders. Replace them with dated, documented provider extracts before analysis or response decisions.</p>
+    <label><input id="flows" type="checkbox" checked> Mobility flow corridors</label>
+    <label><input id="health" type="checkbox" checked> Health facilities</label>
+    <label><input id="shelter" type="checkbox" checked> Refugee / IDP sites</label>
+    <label><input id="transport" type="checkbox" checked> Airports and bus stops</label>
+    <div class="legend">
+      <div><span class="dot" style="background:#d96c42"></span>DRC → neighboring country</div>
+      <div><span class="dot" style="background:#147d7e"></span>Health facility</div>
+      <div><span class="dot" style="background:#7a55a3"></span>Refugee / IDP site</div>
+      <div><span class="dot" style="background:#314e63"></span>Transport hub</div>
+    </div>
+    <p><small>Basemap © OpenStreetMap contributors. See the <a href="https://github.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping" target="_blank">repository README</a> for provenance and licenses.</small></p>
+  </aside>
+  <div id="map"></div>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    const demo = {
+      type:'FeatureCollection', features:[
+        {type:'Feature',properties:{name:'Bunia health facility',layer:'health'},geometry:{type:'Point',coordinates:[30.22,1.56]}},
+        {type:'Feature',properties:{name:'Goma health facility',layer:'health'},geometry:{type:'Point',coordinates:[29.23,-1.68]}},
+        {type:'Feature',properties:{name:'Aru refugee / IDP site',layer:'shelter'},geometry:{type:'Point',coordinates:[30.82,2.62]}},
+        {type:'Feature',properties:{name:'Goma airport',layer:'transport'},geometry:{type:'Point',coordinates:[29.24,-1.67]}},
+        {type:'Feature',properties:{name:'Kasindi border crossing',layer:'transport'},geometry:{type:'Point',coordinates:[29.71,0.31]}},
+        {type:'Feature',properties:{name:'DRC → Uganda (demo)',layer:'flow',count:12000},geometry:{type:'LineString',coordinates:[[29.23,-1.68],[30.62,0.32]]}},
+        {type:'Feature',properties:{name:'DRC → Rwanda (demo)',layer:'flow',count:8500},geometry:{type:'LineString',coordinates:[[29.23,-1.68],[29.63,-2.60]]}},
+        {type:'Feature',properties:{name:'DRC → Burundi (demo)',layer:'flow',count:6200},geometry:{type:'LineString',coordinates:[[28.86,-2.50],[29.36,-3.38]]}},
+        {type:'Feature',properties:{name:'DRC → Tanzania (demo)',layer:'flow',count:4100},geometry:{type:'LineString',coordinates:[[29.02,-6.00],[30.00,-6.82]]}},
+        {type:'Feature',properties:{name:'DRC → Zambia (demo)',layer:'flow',count:2800},geometry:{type:'LineString',coordinates:[[28.00,-11.66],[28.28,-15.42]}}
+      ]
+    };
+    const map = new maplibregl.Map({container:'map', center:[28.8,-2.5], zoom:5.1, style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
+    map.addControl(new maplibregl.NavigationControl(),'bottom-right');
+    map.on('load', () => {
+      map.addSource('demo',{type:'geojson',data:demo});
+      map.addLayer({id:'flow',type:'line',source:'demo',filter:['==',['get','layer'],'flow'],paint:{'line-color':'#d96c42','line-width':['interpolate',['linear'],['get','count'],2800,2,12000,7],'line-opacity':.82,'line-dasharray':[1,1]}});
+      ['health','shelter','transport'].forEach((kind) => map.addLayer({id:kind,type:'circle',source:'demo',filter:['==',['get','layer'],kind],paint:{'circle-color':kind==='health'?'#147d7e':kind==='shelter'?'#7a55a3':'#314e63','circle-radius':7,'circle-stroke-color':'#fff','circle-stroke-width':2}}));
+      map.on('click',['flow','health','shelter','transport'],e => new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+e.features[0].properties.name+'</strong><br><small>Demo layer — replace with a dated source extract.</small>').addTo(map));
+      ['flows','health','shelter','transport'].forEach(id=>document.getElementById(id).addEventListener('change',e=>map.setLayoutProperty(id==='flows'?'flow':id,'visibility',e.target.checked?'visible':'none')));
+    });
+  </script>
+</body>
+</html>
