@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DRC mobility and border context map</title>
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
   <style>
     :root { --ink:#18252d; --accent:#d96c42; --teal:#147d7e; }
     html, body, #map { height:100%; margin:0; }
@@ -35,6 +36,7 @@
   </aside>
   <div id="map"></div>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     const demo = {
       type:'FeatureCollection', features:[
@@ -50,15 +52,39 @@
         {type:'Feature',properties:{name:'DRC → Zambia (demo)',layer:'flow',count:2800},geometry:{type:'LineString',coordinates:[[28.00,-11.66],[28.28,-15.42]}}
       ]
     };
-    const map = new maplibregl.Map({container:'map', center:[28.8,-2.5], zoom:5.1, style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
-    map.addControl(new maplibregl.NavigationControl(),'bottom-right');
-    map.on('load', () => {
+    function renderLeafletFallback() {
+      const fallback = L.map('map').setView([-2.5, 28.8], 5.1);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19, attribution:'© OpenStreetMap contributors'}).addTo(fallback);
+      demo.features.forEach((feature) => {
+        const p = feature.properties;
+        if (feature.geometry.type === 'LineString') {
+          L.polyline(feature.geometry.coordinates.map(([lng, lat]) => [lat, lng]), {color:'#d96c42', weight:Math.max(2, Math.min(7, p.count / 2200)), dashArray:'6 6'}).bindPopup(p.name + '<br><small>Demo layer — replace with a dated source extract.</small>').addTo(fallback);
+        } else {
+          const color = p.layer === 'health' ? '#147d7e' : p.layer === 'shelter' ? '#7a55a3' : '#314e63';
+          L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], {radius:7, color:'#fff', weight:2, fillColor:color, fillOpacity:1}).bindPopup(p.name + '<br><small>Demo layer — replace with a dated source extract.</small>').addTo(fallback);
+        }
+      });
+      document.getElementById('panel').insertAdjacentHTML('beforeend', '<p><small>MapLibre WebGL was unavailable; using the compatibility map.</small></p>');
+    }
+
+    let map;
+    try {
+      if (!maplibregl || !maplibregl.supported()) throw new Error('WebGL unavailable');
+      map = new maplibregl.Map({container:'map', center:[28.8,-2.5], zoom:5.1, style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
+      map.addControl(new maplibregl.NavigationControl(),'bottom-right');
+      map.on('error', (event) => { if (event.error) console.warn('MapLibre map error', event.error); });
+      map.on('load', () => {
       map.addSource('demo',{type:'geojson',data:demo});
       map.addLayer({id:'flow',type:'line',source:'demo',filter:['==',['get','layer'],'flow'],paint:{'line-color':'#d96c42','line-width':['interpolate',['linear'],['get','count'],2800,2,12000,7],'line-opacity':.82,'line-dasharray':[1,1]}});
       ['health','shelter','transport'].forEach((kind) => map.addLayer({id:kind,type:'circle',source:'demo',filter:['==',['get','layer'],kind],paint:{'circle-color':kind==='health'?'#147d7e':kind==='shelter'?'#7a55a3':'#314e63','circle-radius':7,'circle-stroke-color':'#fff','circle-stroke-width':2}}));
       map.on('click',['flow','health','shelter','transport'],e => new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+e.features[0].properties.name+'</strong><br><small>Demo layer — replace with a dated source extract.</small>').addTo(map));
       ['flows','health','shelter','transport'].forEach(id=>document.getElementById(id).addEventListener('change',e=>map.setLayoutProperty(id==='flows'?'flow':id,'visibility',e.target.checked?'visible':'none')));
-    });
+      map.resize();
+      });
+    } catch (error) {
+      console.warn('MapLibre unavailable; using Leaflet fallback.', error);
+      renderLeafletFallback();
+    }
   </script>
 </body>
 </html>
