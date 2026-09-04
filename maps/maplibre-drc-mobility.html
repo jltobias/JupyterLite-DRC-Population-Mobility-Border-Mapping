@@ -15,6 +15,7 @@
     const dataUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson';
     const worldMoveUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/worldmove/worldmove-drc-great-lakes.geojson';
     const dtmUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/dtm/dtm-drc-displacement.geojson';
+    const ebolaUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/ebola/drc-ebola-cases-deaths.geojson';
     const healthsitesUrl = 'https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson';
     const batUrl = 'https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/data/african-bat-database.geojson';
     const buildingsUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/overture/buildings-goma-sample.geojson';
@@ -29,12 +30,13 @@
     map.on('load', async () => {
       map.addSource('ghsl',{type:'raster',tiles:[ghslWmsUrl],tileSize:256,attribution:'GHSL / European Commission JRC'});
       map.addLayer({id:'ghsl',type:'raster',source:'ghsl',paint:{'raster-opacity':0.38}});
-      const [response, worldMoveResponse, dtmResponse, healthsitesResponse, batResponse, buildingsResponse, osmPoiResponse, airportsResponse, hydroRiversResponse, ...allResponses] = await Promise.all([fetch(dataUrl), fetch(worldMoveUrl), fetch(dtmUrl), fetch(healthsitesUrl), fetch(batUrl), fetch(buildingsUrl), fetch(osmPoiUrl), fetch(airportsUrl), fetch(hydroRiversUrl), ...gadmUrls.map(url => fetch(url)), ...karstUrls.map(url => fetch(url))]);
+      const [response, worldMoveResponse, dtmResponse, ebolaResponse, healthsitesResponse, batResponse, buildingsResponse, osmPoiResponse, airportsResponse, hydroRiversResponse, ...allResponses] = await Promise.all([fetch(dataUrl), fetch(worldMoveUrl), fetch(dtmUrl), fetch(ebolaUrl), fetch(healthsitesUrl), fetch(batUrl), fetch(buildingsUrl), fetch(osmPoiUrl), fetch(airportsUrl), fetch(hydroRiversUrl), ...gadmUrls.map(url => fetch(url)), ...karstUrls.map(url => fetch(url))]);
       const gadmResponses = allResponses.slice(0, gadmUrls.length);
       const karstResponses = allResponses.slice(gadmUrls.length);
       const demo = await response.json();
       const worldMove = await worldMoveResponse.json();
       const dtm = await dtmResponse.json();
+      const ebola = await ebolaResponse.json();
       const healthsites = await healthsitesResponse.json();
       const bats = await batResponse.json();
       const buildings = await buildingsResponse.json();
@@ -48,6 +50,9 @@
       map.addLayer({id:'worldmove',type:'line',source:'worldmove',paint:{'line-color':'#e76f51','line-width':2,'line-opacity':0.75}});
       map.addSource('dtm-displacement',{type:'geojson',data:dtm});
       map.addLayer({id:'dtm-displacement',type:'circle',source:'dtm-displacement',paint:{'circle-color':'#8e44ad','circle-radius':6,'circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':0.8}});
+      map.addSource('ebola',{type:'geojson',data:ebola});
+      map.addLayer({id:'ebola-cases',type:'circle',source:'ebola',paint:{'circle-color':'#d73027','circle-radius':['interpolate',['linear'],['get','cases'],0,4,100,7,1400,16],'circle-stroke-color':'#fff','circle-stroke-width':1.2,'circle-opacity':0.82}});
+      map.addLayer({id:'ebola-deaths',type:'circle',source:'ebola',paint:{'circle-color':'#542788','circle-radius':['interpolate',['linear'],['get','deaths'],0,2,100,5,450,11],'circle-stroke-color':'#fff','circle-stroke-width':1,'circle-opacity':0.62}});
       map.addLayer({id:'flow',type:'line',source:'demo',filter:['==',['get','layer'],'flow'],paint:{'line-color':'#d96c42','line-width':['interpolate',['linear'],['get','count'],2800,2,12000,7],'line-opacity':.85,'line-dasharray':[1,1]}});
       ['health','shelter','transport'].forEach((kind) => map.addLayer({id:kind,type:'circle',source:'demo',filter:['==',['get','layer'],kind],paint:{'circle-color':kind==='health'?'#147d7e':kind==='shelter'?'#7a55a3':'#314e63','circle-radius':7,'circle-stroke-color':'#fff','circle-stroke-width':2}}));
       map.addSource('healthsites',{type:'geojson',data:healthsites});
