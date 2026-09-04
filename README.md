@@ -11,6 +11,7 @@ The links below are stable GitHub Pages targets. They become live after the repo
 - [Mobility flowmap notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/02_mobility_flowmap.ipynb)
 - [Health and access notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/03_health_access_layers.ipynb)
 - [JupyterGIS storymap storyboard](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/drc-ebola-mobility-storymap.ipynb)
+- [Ebola weekly map-tour storymap](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/ebola-weekly-map-tour.ipynb)
 - [GeoLibre Web mobility map](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/maps/drc-mobility-map.html) (reopen this launcher after updates so it generates the current source URL)
 - [MapLibre GL JS notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/04_maplibre_experience.ipynb)
 - [Healthsites.io facility export](https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson)
@@ -39,6 +40,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `contents/notebooks/02_mobility_flowmap.ipynb` — browser-runnable flowmap example using explicitly synthetic values.
 - `contents/notebooks/03_health_access_layers.ipynb` — Overpass query starter and metadata fields for health, shelter, and transport layers.
 - `contents/storymaps/drc-ebola-mobility-storymap.ipynb` — JupyterGIS-ready narrative storyboard.
+- `contents/storymaps/ebola-weekly-map-tour.ipynb` — JupyterGIS-ready weekly Ebola map tour with place/time navigation, case line listing, charts, approximate locality maps, and Street View links.
 - `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app, opening in Ituri with the demonstration flow visible and contextual layers available but off by default. The ten GADM boundary layers are grouped under `Administrative boundaries`.
 - `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
 - Both map experiences include a repository-hosted snapshot of the GADM 4.1 level-1 administrative boundaries for the study region, avoiding remote boundary-fetch failures in GeoLibre.
