@@ -25,7 +25,7 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Install JupyterLite
-        run: python -m pip install "jupyterlite-core==0.6.4" "jupyterlite-pyodide-kernel==0.6.1"
+        run: python -m pip install "jupyterlite-core==0.6.4" "jupyterlite-pyodide-kernel==0.6.1" "jupyter-server>=2,<3"
       - name: Build JupyterLite
         run: jupyter lite build --contents contents --output-dir dist
       - name: Copy static maps
