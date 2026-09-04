@@ -21,11 +21,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Install JupyterLite
-        run: python -m pip install jupyterlite-core jupyterlite-pyodide-kernel
+        run: python -m pip install "jupyterlite-core==0.6.4" "jupyterlite-pyodide-kernel==0.6.1"
       - name: Build JupyterLite
         run: jupyter lite build --contents contents --output-dir dist
       - name: Copy static maps
