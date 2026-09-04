@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DRC mobility map — MapLibre GL JS</title>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <style>html,body,#map{height:100%;margin:0}#notice{position:absolute;z-index:1;top:12px;left:12px;max-width:320px;padding:12px 14px;background:#fffdf8ee;border-radius:10px;font:14px system-ui,sans-serif;box-shadow:0 2px 12px #0003}</style>
+</head>
+<body>
+  <div id="notice"><strong>MapLibre GL JS experience</strong><br><small>Demonstration values only. Replace with dated, documented extracts before analysis.</small></div>
+  <div id="map"></div>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    const dataUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson';
+    const map = new maplibregl.Map({container:'map',center:[28.8,-2.5],zoom:5.1,style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
+    map.addControl(new maplibregl.NavigationControl(),'bottom-right');
+    map.on('load', async () => {
+      const response = await fetch(dataUrl);
+      const demo = await response.json();
+      map.addSource('demo',{type:'geojson',data:demo});
+      map.addLayer({id:'flow',type:'line',source:'demo',filter:['==',['get','layer'],'flow'],paint:{'line-color':'#d96c42','line-width':['interpolate',['linear'],['get','count'],2800,2,12000,7],'line-opacity':.85,'line-dasharray':[1,1]}});
+      ['health','shelter','transport'].forEach((kind) => map.addLayer({id:kind,type:'circle',source:'demo',filter:['==',['get','layer'],kind],paint:{'circle-color':kind==='health'?'#147d7e':kind==='shelter'?'#7a55a3':'#314e63','circle-radius':7,'circle-stroke-color':'#fff','circle-stroke-width':2}}));
+      map.on('click',['flow','health','shelter','transport'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+e.features[0].properties.name+'</strong><br><small>Demo layer — replace with a dated source extract.</small>').addTo(map));
+    });
+  </script>
+</body>
+</html>

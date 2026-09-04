@@ -2,6 +2,8 @@
 
 Put dated, licensed provider extracts here before running analysis. Do not commit personal data or precise sensitive locations.
 
+`drc-mobility-demo.geojson` is an illustrative layer used by the GeoLibre Web and MapLibre demonstrations; it is not an official estimate.
+
 Suggested layout:
 
 - `iom_dtm/` - DTM flow monitoring, displacement tracking, or mobility tracking extracts.
