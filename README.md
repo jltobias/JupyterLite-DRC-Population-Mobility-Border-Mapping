@@ -18,6 +18,7 @@ The links below are stable GitHub Pages targets. They become live after the repo
 - [African Bat Database](https://figshare.com/articles/dataset/African_Bat_Database/26363308)
 - [Overture Maps buildings guide](https://docs.overturemaps.org/guides/buildings/)
 - [OpenStreetMap POI sample](https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/osm/poi-goma-sample.geojson)
+- [Global Human Settlement Layer download portal](https://human-settlement.emergency.copernicus.eu/download.php)
 - [Repository contents](https://github.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/tree/main/contents)
 
 ## Geographic and analytical scope
@@ -38,6 +39,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - Both map experiences include the African Bat Database occurrence layer; the Pages build converts the Figshare CSV to GeoJSON for browser use.
 - Both map experiences include an Overture Maps building-footprint layer sampled around Goma; the notebooks document how to expand the bounding box with the Overture Python client.
 - Both map experiences include an OpenStreetMap/Overpass POI layer sampled around Goma for amenity, shop, tourism, office, and public-transport context.
+- Both map experiences include a GHSL 2020 built-up-surface raster layer from the European Commission JRC WMS; use the official GHSL download portal for other products, epochs, and resolutions.
 - Both map experiences include WHYMAP/WOKAM layers for karst polygons, caves, non-exposed karst points, and springs.
 - `data/README.md` — safe data-ingestion rules and suggested folder layout.
 - `.github/workflows/deploy-pages.yml` — automatic JupyterLite + static-map deployment.
