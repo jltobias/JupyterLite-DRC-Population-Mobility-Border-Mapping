@@ -8,6 +8,7 @@
     {"type":"Feature","properties":{"name":"Goma airport","layer":"transport","measurement_type":"demonstration only"},"geometry":{"type":"Point","coordinates":[29.24,-1.67]}},
     {"type":"Feature","properties":{"name":"Kasindi border crossing","layer":"transport","measurement_type":"demonstration only"},"geometry":{"type":"Point","coordinates":[29.71,0.31]}},
     {"type":"Feature","properties":{"name":"DRC → Uganda (demo)","layer":"flow","count":12000,"measurement_type":"demonstration only"},"geometry":{"type":"LineString","coordinates":[[29.23,-1.68],[30.62,0.32]]}},
+    {"type":"Feature","properties":{"name":"DRC → South Sudan (demo)","layer":"flow","count":2600,"measurement_type":"demonstration only"},"geometry":{"type":"LineString","coordinates":[[30.22,1.56],[31.60,4.85]]}},
     {"type":"Feature","properties":{"name":"DRC → Rwanda (demo)","layer":"flow","count":8500,"measurement_type":"demonstration only"},"geometry":{"type":"LineString","coordinates":[[29.23,-1.68],[29.63,-2.60]]}},
     {"type":"Feature","properties":{"name":"DRC → Burundi (demo)","layer":"flow","count":6200,"measurement_type":"demonstration only"},"geometry":{"type":"LineString","coordinates":[[28.86,-2.50],[29.36,-3.38]]}},
     {"type":"Feature","properties":{"name":"DRC → Tanzania (demo)","layer":"flow","count":4100,"measurement_type":"demonstration only"},"geometry":{"type":"LineString","coordinates":[[29.02,-6.00],[30.00,-6.82]]}},

@@ -4,6 +4,8 @@ Put dated, licensed provider extracts here before running analysis. Do not commi
 
 `drc-mobility-demo.geojson` is an illustrative layer used by the GeoLibre Web and MapLibre demonstrations; it is not an official estimate.
 
+The demonstration flow layer includes a synthetic DRC → South Sudan line from Ituri toward Juba. Treat the route and count as interface test data only; replace them with a dated, documented provider extract for analysis.
+
 Suggested layout:
 
 - `iom_dtm/` - DTM flow monitoring, displacement tracking, or mobility tracking extracts.
