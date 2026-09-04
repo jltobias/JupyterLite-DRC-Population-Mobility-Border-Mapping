@@ -30,6 +30,28 @@ jobs:
         run: jupyter lite build --contents contents --output-dir dist
       - name: Copy static maps
         run: cp -R maps dist/maps
+      - name: Add African Bat Database GeoJSON layer
+        run: |
+          python - <<'PY'
+          import csv, io, json, pathlib, urllib.request
+          url = 'https://ndownloader.figshare.com/files/67270397'
+          raw = urllib.request.urlopen(url).read().decode('utf-8-sig')
+          rows = csv.DictReader(io.StringIO(raw))
+          features = []
+          for row in rows:
+              try:
+                  lon = float(row['Longitude'])
+                  lat = float(row['Latitude'])
+              except (KeyError, TypeError, ValueError):
+                  continue
+              properties = {k: v for k, v in row.items() if k not in ('Longitude', 'Latitude')}
+              features.append({'type': 'Feature', 'properties': properties,
+                               'geometry': {'type': 'Point', 'coordinates': [lon, lat]}})
+          output = pathlib.Path('dist/data/african-bat-database.geojson')
+          output.parent.mkdir(parents=True, exist_ok=True)
+          output.write_text(json.dumps({'type': 'FeatureCollection', 'name': 'African Bat Database v2.0', 'features': features}, ensure_ascii=False), encoding='utf-8')
+          print(f'Wrote {len(features)} bat occurrence features to {output}')
+          PY
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

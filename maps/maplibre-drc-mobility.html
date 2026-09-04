@@ -14,26 +14,30 @@
   <script>
     const dataUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson';
     const healthsitesUrl = 'https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson';
+    const batUrl = 'https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/data/african-bat-database.geojson';
     const gadmUrls = ['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_${iso}_1.json`);
     const map = new maplibregl.Map({container:'map',center:[28.8,-2.5],zoom:5.1,style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
     map.addControl(new maplibregl.NavigationControl(),'bottom-right');
     map.on('load', async () => {
-      const [response, healthsitesResponse, ...gadmResponses] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl), ...gadmUrls.map(url => fetch(url))]);
+      const [response, healthsitesResponse, batResponse, ...gadmResponses] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl), fetch(batUrl), ...gadmUrls.map(url => fetch(url))]);
       const demo = await response.json();
       const healthsites = await healthsitesResponse.json();
+      const bats = await batResponse.json();
       const gadm = await Promise.all(gadmResponses.map(response => response.json()));
       map.addSource('demo',{type:'geojson',data:demo});
       map.addLayer({id:'flow',type:'line',source:'demo',filter:['==',['get','layer'],'flow'],paint:{'line-color':'#d96c42','line-width':['interpolate',['linear'],['get','count'],2800,2,12000,7],'line-opacity':.85,'line-dasharray':[1,1]}});
       ['health','shelter','transport'].forEach((kind) => map.addLayer({id:kind,type:'circle',source:'demo',filter:['==',['get','layer'],kind],paint:{'circle-color':kind==='health'?'#147d7e':kind==='shelter'?'#7a55a3':'#314e63','circle-radius':7,'circle-stroke-color':'#fff','circle-stroke-width':2}}));
       map.addSource('healthsites',{type:'geojson',data:healthsites});
       map.addLayer({id:'healthsites',type:'circle',source:'healthsites',paint:{'circle-color':'#f0a202','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':0.9}});
+      map.addSource('bats',{type:'geojson',data:bats});
+      map.addLayer({id:'bats',type:'circle',source:'bats',paint:{'circle-color':'#6a3d9a','circle-radius':3.5,'circle-stroke-color':'#fff','circle-stroke-width':0.8,'circle-opacity':0.7}});
       gadm.forEach((boundaries, index) => {
         const id = `gadm-${index}`;
         map.addSource(id,{type:'geojson',data:boundaries});
         map.addLayer({id:`${id}-fill`,type:'fill',source:id,paint:{'fill-color':'#2b6f77','fill-opacity':0.03}});
         map.addLayer({id:`${id}-line`,type:'line',source:id,paint:{'line-color':'#315b66','line-width':1.2,'line-opacity':0.75}});
       });
-      map.on('click',['flow','health','shelter','transport','healthsites'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+e.features[0].properties.name+'</strong><br><small>'+(e.features[0].layer.id==='healthsites'?'Healthsites.io export — verify date and completeness.':'Demo layer — replace with a dated source extract.')+'</small>').addTo(map));
+      map.on('click',['flow','health','shelter','transport','healthsites','bats'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+(e.features[0].properties.name||e.features[0].properties.Species||'African bat occurrence')+'</strong><br><small>'+(e.features[0].layer.id==='healthsites'?'Healthsites.io export — verify date and completeness.':e.features[0].layer.id==='bats'?'African Bat Database occurrence — verify record date and coordinate precision.':'Demo layer — replace with a dated source extract.')+'</small>').addTo(map));
     });
   </script>
 </body>
