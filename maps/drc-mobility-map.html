@@ -18,7 +18,7 @@
       'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/caves.geojson',
       'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/non_exposed_karst.geojson',
       'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/springs.geojson',
-      ...['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_${iso}_1.json`)
+      ...['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_${iso}_1.json`)
     ];
     const target = new URL('https://web.geolibre.app/');
     sources.forEach(url => target.searchParams.append('data', url));

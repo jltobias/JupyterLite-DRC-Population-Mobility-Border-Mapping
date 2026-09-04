@@ -35,7 +35,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `contents/storymaps/drc-ebola-mobility-storymap.ipynb` — JupyterGIS-ready narrative storyboard.
 - `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app with the DRC demonstration GeoJSON.
 - `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
-- Both map experiences include GADM 4.1 level-1 administrative boundaries for the study region.
+- Both map experiences include a repository-hosted snapshot of the GADM 4.1 level-1 administrative boundaries for the study region, avoiding remote boundary-fetch failures in GeoLibre.
 - Both map experiences include the African Bat Database occurrence layer; the Pages build converts the Figshare CSV to GeoJSON for browser use.
 - Both map experiences include an Overture Maps building-footprint layer sampled around Goma; the notebooks document how to expand the bounding box with the Overture Python client.
 - Both map experiences include an OpenStreetMap/Overpass POI layer sampled around Goma for amenity, shop, tourism, office, and public-transport context.
