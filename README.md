@@ -39,7 +39,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - Both map experiences include the African Bat Database occurrence layer; the Pages build converts the Figshare CSV to GeoJSON for browser use.
 - Both map experiences include an Overture Maps building-footprint layer sampled around Goma; the notebooks document how to expand the bounding box with the Overture Python client.
 - Both map experiences include an OpenStreetMap/Overpass POI layer sampled around Goma for amenity, shop, tourism, office, and public-transport context.
-- Both map experiences include a GHSL 2020 built-up-surface raster layer from the European Commission JRC WMS; use the official GHSL download portal for other products, epochs, and resolutions.
+- The MapLibre experience includes a GHSL 2020 built-up-surface raster layer from the European Commission JRC WMS. The GeoLibre launcher uses file-based sources only and links to the official GHSL portal for compatible downloaded extracts and other products, epochs, and resolutions.
 - The shared demonstration flow layer includes an explicit DRC → South Sudan corridor from Ituri toward Juba; its value is synthetic and must be replaced with a dated mobility extract before analysis.
 - Both map experiences include WHYMAP/WOKAM layers for karst polygons, caves, non-exposed karst points, and springs.
 - `data/README.md` — safe data-ingestion rules and suggested folder layout.
