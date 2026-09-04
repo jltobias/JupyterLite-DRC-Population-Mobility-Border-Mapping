@@ -18,6 +18,7 @@
     const buildingsUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/overture/buildings-goma-sample.geojson';
     const osmPoiUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/osm/poi-goma-sample.geojson';
     const airportsUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/natural-earth/airports-10m.geojson';
+    const hydroRiversUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/hydrosheds/hydrorivers-af-drc-great-lakes.geojson';
     const ghslWmsUrl = 'https://geospatial.jrc.ec.europa.eu/geoserver/wms?service=WMS&request=GetMap&version=1.1.1&layers=africa_platform:ghsl_BuiltUpSurface_2020_3ss&styles=&format=image/png&transparent=true&srs=EPSG:3857&width=256&height=256&bbox={bbox-epsg-3857}';
     const gadmUrls = ['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_${iso}_1.json`);
     const karstUrls = ['karst','caves','non_exposed_karst','springs'].map(name => `https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/${name}.geojson`);
@@ -26,7 +27,7 @@
     map.on('load', async () => {
       map.addSource('ghsl',{type:'raster',tiles:[ghslWmsUrl],tileSize:256,attribution:'GHSL / European Commission JRC'});
       map.addLayer({id:'ghsl',type:'raster',source:'ghsl',paint:{'raster-opacity':0.38}});
-      const [response, healthsitesResponse, batResponse, buildingsResponse, osmPoiResponse, airportsResponse, ...allResponses] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl), fetch(batUrl), fetch(buildingsUrl), fetch(osmPoiUrl), fetch(airportsUrl), ...gadmUrls.map(url => fetch(url)), ...karstUrls.map(url => fetch(url))]);
+      const [response, healthsitesResponse, batResponse, buildingsResponse, osmPoiResponse, airportsResponse, hydroRiversResponse, ...allResponses] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl), fetch(batUrl), fetch(buildingsUrl), fetch(osmPoiUrl), fetch(airportsUrl), fetch(hydroRiversUrl), ...gadmUrls.map(url => fetch(url)), ...karstUrls.map(url => fetch(url))]);
       const gadmResponses = allResponses.slice(0, gadmUrls.length);
       const karstResponses = allResponses.slice(gadmUrls.length);
       const demo = await response.json();
@@ -35,6 +36,7 @@
       const buildings = await buildingsResponse.json();
       const osmPoi = await osmPoiResponse.json();
       const airports = await airportsResponse.json();
+      const hydroRivers = await hydroRiversResponse.json();
       const gadm = await Promise.all(gadmResponses.map(response => response.json()));
       const karst = await Promise.all(karstResponses.map(response => response.json()));
       map.addSource('demo',{type:'geojson',data:demo});
@@ -50,6 +52,8 @@
       map.addLayer({id:'osm-poi',type:'circle',source:'osm-poi',paint:{'circle-color':'#2a9d8f','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1.2,'circle-opacity':0.9}});
       map.addSource('airports',{type:'geojson',data:airports});
       map.addLayer({id:'airports',type:'circle',source:'airports',minzoom:3,paint:{'circle-color':'#f4a261','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1.2,'circle-opacity':0.9}});
+      map.addSource('hydrorivers',{type:'geojson',data:hydroRivers});
+      map.addLayer({id:'hydrorivers',type:'line',source:'hydrorivers',minzoom:4,paint:{'line-color':'#2b83ba','line-width':['interpolate',['linear'],['zoom'],4,0.7,8,1.5,12,2.5],'line-opacity':0.78}});
       const karstStyles = [
         ['karst','fill',{ 'fill-color':'#c9943e','fill-opacity':0.2}],
         ['caves','circle',{ 'circle-color':'#7b2d26','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1}],
