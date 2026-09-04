@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open DRC mobility experiences in Chrome</title>
+  <style>body{font:16px system-ui,sans-serif;max-width:760px;margin:48px auto;padding:0 20px}a{display:block;margin:12px 0;padding:12px 16px;background:#eef5ff;border-radius:8px;color:#135}small{color:#555}</style>
+</head>
+<body>
+  <h1>Open in Chrome</h1>
+  <p>Choose an experience below. The primary link requests Chrome; the fallback opens in the current browser.</p>
+  <div id="links"></div>
+  <script>
+    const base = 'https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/';
+    const experiences = [
+      ['Notebook 01 — data inventory', 'lab/index.html?path=notebooks/01_data_inventory.ipynb'],
+      ['Notebook 02 — mobility flowmap', 'lab/index.html?path=notebooks/02_mobility_flowmap.ipynb'],
+      ['Notebook 03 — health and access layers', 'lab/index.html?path=notebooks/03_health_access_layers.ipynb'],
+      ['Notebook 04 — MapLibre experience', 'lab/index.html?path=notebooks/04_maplibre_experience.ipynb'],
+      ['Storymap — DRC Ebola preparedness', 'lab/index.html?path=storymaps/drc-ebola-mobility-storymap.ipynb'],
+      ['Storymap — weekly Ebola map tour', 'lab/index.html?path=storymaps/ebola-weekly-map-tour.ipynb'],
+      ['GeoLibre Web map', 'maps/drc-mobility-map.html'],
+      ['MapLibre GL JS map', 'maps/maplibre-drc-mobility.html']
+    ];
+    const container = document.getElementById('links');
+    experiences.forEach(([label, path]) => {
+      const url = base + path;
+      const chrome = document.createElement('a');
+      chrome.href = 'googlechrome://navigate?url=' + encodeURIComponent(url);
+      chrome.textContent = label + ' — launch Chrome';
+      container.appendChild(chrome);
+      const fallback = document.createElement('a');
+      fallback.href = url;
+      fallback.textContent = 'Fallback: open in this browser';
+      fallback.style.background = '#f7f7f7';
+      container.appendChild(fallback);
+    });
+  </script>
+  <p><small>Browsers may block external protocol links. On Windows, use <code>scripts/open_all_in_chrome.ps1</code> for a guaranteed Chrome launch.</small></p>
+</body>
+</html>

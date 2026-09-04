@@ -14,6 +14,7 @@ The links below are stable GitHub Pages targets. They become live after the repo
 - [Ebola weekly map-tour storymap](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/ebola-weekly-map-tour.ipynb)
 - [GeoLibre Web mobility map](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/maps/drc-mobility-map.html) (reopen this launcher after updates so it generates the current source URL)
 - [MapLibre GL JS notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/04_maplibre_experience.ipynb)
+- [Open all notebooks, storymaps, and maps in Chrome](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/maps/chrome-launcher.html)
 - [Healthsites.io facility export](https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson)
 - [GADM administrative boundary data](https://gadm.org/data.html)
 - [African Bat Database](https://figshare.com/articles/dataset/African_Bat_Database/26363308)
@@ -43,6 +44,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `contents/storymaps/ebola-weekly-map-tour.ipynb` — JupyterGIS-ready weekly Ebola map tour with place/time navigation, case line listing, charts, approximate locality maps, and Street View links.
 - `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app, opening in Ituri with the demonstration flow visible and contextual layers available but off by default. The ten GADM boundary layers are grouped under `Administrative boundaries`.
 - `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
+- `maps/chrome-launcher.html` — Chrome-protocol launcher with a fallback link for every notebook, storymap, and map.
 - Both map experiences include a repository-hosted snapshot of the GADM 4.1 level-1 administrative boundaries for the study region, avoiding remote boundary-fetch failures in GeoLibre.
 - Both map experiences include the African Bat Database occurrence layer; the Pages build converts the Figshare CSV to GeoJSON for browser use.
 - Both map experiences include an Overture Maps building-footprint layer sampled around Goma; the notebooks document how to expand the bounding box with the Overture Python client.
@@ -68,6 +70,8 @@ For every layer, preserve `source`, `source_url`, `reference_period`, `retrieved
 ## Local use
 
 Serve the repository root with a static web server and open `maps/drc-mobility-map.html`. To build the notebook workspace locally:
+
+To launch every hosted experience explicitly in Google Chrome on Windows, run `scripts/open_all_in_chrome.ps1`. A hosted webpage cannot change the operating system’s default browser by itself; use the Chrome launcher link above or the Windows script when Chrome is required.
 
 ```powershell
 python -m pip install jupyterlite-core jupyterlite-pyodide-kernel
