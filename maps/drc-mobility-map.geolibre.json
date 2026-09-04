@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "name": "DRC mobility and border context",
+  "mapView": {"center": [30.2, 1.6], "zoom": 6.5, "bearing": 0, "pitch": 0},
+  "basemapStyleUrl": "",
+  "basemapVisible": true,
+  "basemapOpacity": 1,
+  "layers": [
+    {"id":"demo-flow","name":"Mobility flows (demonstration)","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson","visible":true,"opacity":1,"style":{"circleRadius":7,"strokeWidth":2}},
+    {"id":"healthsites","name":"Healthsites.io facilities","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson","visible":false,"opacity":1},
+    {"id":"african-bats","name":"African Bat Database","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/data/african-bat-database.geojson","visible":false,"opacity":1},
+    {"id":"overture-buildings","name":"Overture building footprints","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/overture/buildings-goma-sample.geojson","visible":false,"opacity":1},
+    {"id":"osm-poi","name":"OpenStreetMap POI","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/osm/poi-goma-sample.geojson","visible":false,"opacity":1},
+    {"id":"airports","name":"Natural Earth airports","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/natural-earth/airports-10m.geojson","visible":false,"opacity":1},
+    {"id":"gadm-cod","name":"GADM COD level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_COD_1.json","visible":false,"opacity":1},
+    {"id":"gadm-uga","name":"GADM UGA level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_UGA_1.json","visible":false,"opacity":1},
+    {"id":"gadm-rwa","name":"GADM RWA level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_RWA_1.json","visible":false,"opacity":1},
+    {"id":"gadm-bdi","name":"GADM BDI level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_BDI_1.json","visible":false,"opacity":1},
+    {"id":"gadm-ssd","name":"GADM SSD level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_SSD_1.json","visible":false,"opacity":1},
+    {"id":"gadm-zmb","name":"GADM ZMB level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_ZMB_1.json","visible":false,"opacity":1},
+    {"id":"gadm-tza","name":"GADM TZA level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_TZA_1.json","visible":false,"opacity":1},
+    {"id":"gadm-caf","name":"GADM CAF level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_CAF_1.json","visible":false,"opacity":1},
+    {"id":"gadm-cog","name":"GADM COG level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_COG_1.json","visible":false,"opacity":1},
+    {"id":"gadm-ago","name":"GADM AGO level 1","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_AGO_1.json","visible":false,"opacity":1},
+    {"id":"karst","name":"WHYMAP/WOKAM karst","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/karst.geojson","visible":false,"opacity":1},
+    {"id":"caves","name":"WHYMAP/WOKAM caves","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/caves.geojson","visible":false,"opacity":1},
+    {"id":"non-exposed-karst","name":"WHYMAP/WOKAM non-exposed karst","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/non_exposed_karst.geojson","visible":false,"opacity":1},
+    {"id":"springs","name":"WHYMAP/WOKAM springs","type":"geojson","source":{"type":"geojson"},"sourcePath":"https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/springs.geojson","visible":false,"opacity":1}
+  ],
+  "styles": {},
+  "plugins": {"activePluginIds": [], "settings": {}},
+  "metadata": {"note": "Context layers are hidden by default. Values and routes marked demonstration-only are not official estimates."}
+}

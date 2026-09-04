@@ -34,7 +34,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `contents/notebooks/02_mobility_flowmap.ipynb` — browser-runnable flowmap example using explicitly synthetic values.
 - `contents/notebooks/03_health_access_layers.ipynb` — Overpass query starter and metadata fields for health, shelter, and transport layers.
 - `contents/storymaps/drc-ebola-mobility-storymap.ipynb` — JupyterGIS-ready narrative storyboard.
-- `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app with the DRC demonstration GeoJSON.
+- `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app, opening in Ituri with the demonstration flow visible and contextual layers available but off by default.
 - `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
 - Both map experiences include a repository-hosted snapshot of the GADM 4.1 level-1 administrative boundaries for the study region, avoiding remote boundary-fetch failures in GeoLibre.
 - Both map experiences include the African Bat Database occurrence layer; the Pages build converts the Figshare CSV to GeoJSON for browser use.

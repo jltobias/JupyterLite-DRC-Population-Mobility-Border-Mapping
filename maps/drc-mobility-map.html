@@ -8,21 +8,8 @@
 <body>
   <p>Opening the DRC demonstration layers in <a id="launch" href="#">GeoLibre Web</a>…</p>
   <script>
-    const sources = [
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson',
-      'https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson',
-      'https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/data/african-bat-database.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/overture/buildings-goma-sample.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/osm/poi-goma-sample.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/natural-earth/airports-10m.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/karst.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/caves.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/non_exposed_karst.geojson',
-      'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/springs.geojson',
-      ...['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/gadm/gadm41_${iso}_1.json`)
-    ];
     const target = new URL('https://web.geolibre.app/');
-    sources.forEach(url => target.searchParams.append('data', url));
+    target.searchParams.set('url', 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/maps/drc-mobility-map.geolibre.json');
     target.searchParams.set('layout', 'viewer');
     target.searchParams.set('config_version', 'repository-gadm-20260904');
     document.getElementById('launch').href = target;
