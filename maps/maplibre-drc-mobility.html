@@ -15,17 +15,19 @@
     const dataUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson';
     const healthsitesUrl = 'https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson';
     const batUrl = 'https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/data/african-bat-database.geojson';
+    const buildingsUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/overture/buildings-goma-sample.geojson';
     const gadmUrls = ['COD','UGA','RWA','BDI','SSD','ZMB','TZA','CAF','COG','AGO'].map(iso => `https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_${iso}_1.json`);
     const karstUrls = ['karst','caves','non_exposed_karst','springs'].map(name => `https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/whymap/geojson/${name}.geojson`);
     const map = new maplibregl.Map({container:'map',center:[28.8,-2.5],zoom:5.1,style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
     map.addControl(new maplibregl.NavigationControl(),'bottom-right');
     map.on('load', async () => {
-      const [response, healthsitesResponse, batResponse, ...allResponses] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl), fetch(batUrl), ...gadmUrls.map(url => fetch(url)), ...karstUrls.map(url => fetch(url))]);
+      const [response, healthsitesResponse, batResponse, buildingsResponse, ...allResponses] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl), fetch(batUrl), fetch(buildingsUrl), ...gadmUrls.map(url => fetch(url)), ...karstUrls.map(url => fetch(url))]);
       const gadmResponses = allResponses.slice(0, gadmUrls.length);
       const karstResponses = allResponses.slice(gadmUrls.length);
       const demo = await response.json();
       const healthsites = await healthsitesResponse.json();
       const bats = await batResponse.json();
+      const buildings = await buildingsResponse.json();
       const gadm = await Promise.all(gadmResponses.map(response => response.json()));
       const karst = await Promise.all(karstResponses.map(response => response.json()));
       map.addSource('demo',{type:'geojson',data:demo});
@@ -35,6 +37,8 @@
       map.addLayer({id:'healthsites',type:'circle',source:'healthsites',paint:{'circle-color':'#f0a202','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':0.9}});
       map.addSource('bats',{type:'geojson',data:bats});
       map.addLayer({id:'bats',type:'circle',source:'bats',paint:{'circle-color':'#6a3d9a','circle-radius':3.5,'circle-stroke-color':'#fff','circle-stroke-width':0.8,'circle-opacity':0.7}});
+      map.addSource('overture-buildings',{type:'geojson',data:buildings});
+      map.addLayer({id:'overture-buildings',type:'fill',source:'overture-buildings',paint:{'fill-color':'#e07a5f','fill-opacity':0.45,'fill-outline-color':'#9d4e3d'}});
       const karstStyles = [
         ['karst','fill',{ 'fill-color':'#c9943e','fill-opacity':0.2}],
         ['caves','circle',{ 'circle-color':'#7b2d26','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1}],
@@ -53,7 +57,7 @@
         map.addLayer({id:`${id}-fill`,type:'fill',source:id,paint:{'fill-color':'#2b6f77','fill-opacity':0.03}});
         map.addLayer({id:`${id}-line`,type:'line',source:id,paint:{'line-color':'#315b66','line-width':1.2,'line-opacity':0.75}});
       });
-      map.on('click',['flow','health','shelter','transport','healthsites','bats'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+(e.features[0].properties.name||e.features[0].properties.Species||'African bat occurrence')+'</strong><br><small>'+(e.features[0].layer.id==='healthsites'?'Healthsites.io export — verify date and completeness.':e.features[0].layer.id==='bats'?'African Bat Database occurrence — verify record date and coordinate precision.':'Demo layer — replace with a dated source extract.')+'</small>').addTo(map));
+      map.on('click',['flow','health','shelter','transport','healthsites','bats','overture-buildings'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+(e.features[0].properties.name||e.features[0].properties.primary_name||e.features[0].properties.Species||'African bat occurrence')+'</strong><br><small>'+(e.features[0].layer.id==='healthsites'?'Healthsites.io export — verify date and completeness.':e.features[0].layer.id==='bats'?'African Bat Database occurrence — verify record date and coordinate precision.':e.features[0].layer.id==='overture-buildings'?'Overture building footprint — sampled Goma extract; verify release and coverage.':'Demo layer — replace with a dated source extract.')+'</small>').addTo(map));
     });
   </script>
 </body>
