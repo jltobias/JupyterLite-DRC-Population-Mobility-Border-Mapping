@@ -14,3 +14,5 @@ Suggested layout:
 - `boundaries/` - Natural Earth or another documented administrative/border source.
 
 Every file should have a companion note with provider, dataset title, URL, retrieval date, reference period, license, and any transformations.
+
+The browser demonstrations use the public [healthsites.io Ituri DRC export](https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson), exported 2026-06-01 and licensed ODbL 1.0. The Healthsites API requires an API key for refreshed downloads; never put that key in a public map URL.

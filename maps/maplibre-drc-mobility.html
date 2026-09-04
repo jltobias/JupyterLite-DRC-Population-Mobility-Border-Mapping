@@ -13,15 +13,19 @@
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script>
     const dataUrl = 'https://raw.githubusercontent.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/main/data/drc-mobility-demo.geojson';
+    const healthsitesUrl = 'https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson';
     const map = new maplibregl.Map({container:'map',center:[28.8,-2.5],zoom:5.1,style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]}});
     map.addControl(new maplibregl.NavigationControl(),'bottom-right');
     map.on('load', async () => {
-      const response = await fetch(dataUrl);
+      const [response, healthsitesResponse] = await Promise.all([fetch(dataUrl), fetch(healthsitesUrl)]);
       const demo = await response.json();
+      const healthsites = await healthsitesResponse.json();
       map.addSource('demo',{type:'geojson',data:demo});
       map.addLayer({id:'flow',type:'line',source:'demo',filter:['==',['get','layer'],'flow'],paint:{'line-color':'#d96c42','line-width':['interpolate',['linear'],['get','count'],2800,2,12000,7],'line-opacity':.85,'line-dasharray':[1,1]}});
       ['health','shelter','transport'].forEach((kind) => map.addLayer({id:kind,type:'circle',source:'demo',filter:['==',['get','layer'],kind],paint:{'circle-color':kind==='health'?'#147d7e':kind==='shelter'?'#7a55a3':'#314e63','circle-radius':7,'circle-stroke-color':'#fff','circle-stroke-width':2}}));
-      map.on('click',['flow','health','shelter','transport'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+e.features[0].properties.name+'</strong><br><small>Demo layer — replace with a dated source extract.</small>').addTo(map));
+      map.addSource('healthsites',{type:'geojson',data:healthsites});
+      map.addLayer({id:'healthsites',type:'circle',source:'healthsites',paint:{'circle-color':'#f0a202','circle-radius':5,'circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':0.9}});
+      map.on('click',['flow','health','shelter','transport','healthsites'],e=>new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<strong>'+e.features[0].properties.name+'</strong><br><small>'+(e.features[0].layer.id==='healthsites'?'Healthsites.io export — verify date and completeness.':'Demo layer — replace with a dated source extract.')+'</small>').addTo(map));
     });
   </script>
 </body>

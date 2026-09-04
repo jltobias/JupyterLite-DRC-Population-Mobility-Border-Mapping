@@ -13,6 +13,7 @@ The links below are stable GitHub Pages targets. They become live after the repo
 - [JupyterGIS storymap storyboard](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=storymaps/drc-ebola-mobility-storymap.ipynb)
 - [GeoLibre Web mobility map](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/maps/drc-mobility-map.html)
 - [MapLibre GL JS notebook](https://jltobias.github.io/JupyterLite-DRC-Population-Mobility-Border-Mapping/lab/index.html?path=notebooks/04_maplibre_experience.ipynb)
+- [Healthsites.io facility export](https://raw.githubusercontent.com/healthsites/drc-ebola-2026/master/healthsites_ituri_drc.geojson)
 - [Repository contents](https://github.com/jltobias/JupyterLite-DRC-Population-Mobility-Border-Mapping/tree/main/contents)
 
 ## Geographic and analytical scope
@@ -28,7 +29,7 @@ The 2026 health context is an active research theme: WHO reports a Bundibugyo vi
 - `contents/notebooks/03_health_access_layers.ipynb` — Overpass query starter and metadata fields for health, shelter, and transport layers.
 - `contents/storymaps/drc-ebola-mobility-storymap.ipynb` — JupyterGIS-ready narrative storyboard.
 - `maps/drc-mobility-map.html` — launcher for the hosted GeoLibre Web app with the DRC demonstration GeoJSON.
-- `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook.
+- `maps/maplibre-drc-mobility.html` — standalone MapLibre GL JS map used by the MapLibre notebook, including the Healthsites.io facility layer.
 - `data/README.md` — safe data-ingestion rules and suggested folder layout.
 - `.github/workflows/deploy-pages.yml` — automatic JupyterLite + static-map deployment.
 
